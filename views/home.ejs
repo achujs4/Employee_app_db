@@ -5,9 +5,10 @@
         <% employees.forEach(employee => { %>
           <div class="card">
             <h3><%= employee.name %></h3>
-            <p>Designation: <%= employee.designation %></p>
-            <p>Location: <%= employee.location %></p>
-            <p>Salary: $<%= employee.salary %></p>
+            <p>Employee Name: <%= employee.name %></p>
+            <p>Employee Designation: <%= employee.designation %></p>
+            <p>Employee Location: <%= employee.location %></p>
+            <p>Salary: <%= employee.salary %></p>
           </div>
         <% }); %>
       <% } else { %>

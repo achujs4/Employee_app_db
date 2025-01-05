@@ -15,6 +15,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('views', path.join(__dirname, 'views'));
+app.use('/', employeeRoutes);
+
 
 // MongoDB Connection
 mongoose.connect('mongodb+srv://ashwinijs:abcABC123@cluster0.y8zfj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
@@ -22,8 +24,6 @@ mongoose.connect('mongodb+srv://ashwinijs:abcABC123@cluster0.y8zfj.mongodb.net/?
   .catch((err) => console.log(err));
 
 
-
-app.use('/', employeeRoutes);
 
 
 const PORT = 5000;
