@@ -1,0 +1,18 @@
+<link rel="stylesheet" href="/public/styles.css">
+<h1>Employee List</h1>
+<div class="card-container">
+    <% if (employees && employees.length > 0) { %>
+        <% employees.forEach(employee => { %>
+          <div class="card">
+            <h3><%= employee.name %></h3>
+            <p>Designation: <%= employee.designation %></p>
+            <p>Location: <%= employee.location %></p>
+            <p>Salary: $<%= employee.salary %></p>
+          </div>
+        <% }); %>
+      <% } else { %>
+        <p>No employees found</p>
+      <% } %>
+      
+</div>
+
