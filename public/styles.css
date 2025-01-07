@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -54,4 +54,12 @@ body {
     padding: 0.5rem;
     margin-bottom: 1rem;
   }
-  
+   */
+
+
+   .card{
+    background-color: aliceblue !important;
+  }
+  .navbar{
+    background-color:lightblue !important;
+  }

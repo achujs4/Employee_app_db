@@ -1,17 +1,72 @@
-<% layout('layout') %>
-<h1>Add Employee</h1>
-<form action="/add" method="post" class="form">
-  <label>Employee Name</label>
-  <input type="text" name="name" required>
-  
-  <label>Designation</label>
-  <input type="text" name="designation" required>
-  
-  <label>Location</label>
-  <input type="text" name="location" required>
-  
-  <label>Salary</label>
-  <input type="number" name="salary" required>
-  
-  <button type="submit">Add Employee</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="/public/styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Employee Management App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <% if (nav && nav.length) { %>
+                        <% nav.forEach(item => { %>
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="<%= item.link %>"><%= item.name %></a>
+                            </li>
+                        <% }); %>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">No Navigation Available</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container mt-4">
+        <h1 class="text-center">Add Employee</h1>
+        <form action="/employee/addform" method="POST" class="mt-4">
+           
+            <div class="form-group">
+                <label for="employeeName">Employee Name</label>
+                <input type="text" class="form-control" id="employeeName" name="employeeName" placeholder="Enter employee name" required>
+            </div>
+
+         
+            <div class="form-group">
+                <label for="employeeDesignation">Employee Designation</label>
+                <input type="text" class="form-control" id="employeeDesignation" name="employeeDesignation" placeholder="Enter employee designation" required>
+            </div>
+
+         
+            <div class="form-group">
+                <label for="employeeLocation">Employee Location</label>
+                <input type="text" class="form-control" id="employeeLocation" name="employeeLocation" placeholder="Enter employee location" required>
+            </div>
+
+          
+            <div class="form-group">
+                <label for="Salary">Employee Salary</label>
+                <input type="number" class="form-control" id="Salary" name="Salary" placeholder="Enter employee salary" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Add Employee</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

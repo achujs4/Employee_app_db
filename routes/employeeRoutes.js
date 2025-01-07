@@ -1,60 +1,68 @@
 const express = require('express');
 const router = express.Router();
-const Employee = require('../models/employee');
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+const employeeModel = require('../model/employeeData');
+
+function employeeroutes(nav) {
+    
+    router.get('/', async (req, res) => {
+        try {
+            const data = await employeeModel.find();
+            res.render('home', { title: "Employees",data,nav});
+        } catch (error) {
+            res.status(404).send("Data not found");
+        }
+    })
 
 
-router.get('/', async (req, res) => {
+    router.get('/addform', (req, res) => {
+        res.render('addemployee', { title: "Add Employee",nav});
+    })
+
+   
+    router.get('/updatepage/:id', async (req, res) => {
+            const data = await employeeModel.findOne({_id:req.params.id});
+            res.render('updateform', { title: "Update Employee",data,employeeid:req.params.id,nav});
+    })
+      
+
+
+    router.post('/updatepage/:id', async (req, res) => {
     try {
-        const employees = await Employee.find(); 
-        res.render('home', { employees: employees });
-    } catch (err) {
-        console.error( err);
-        res.status(500).send('Error retrieving employees');
+        const updatedData = await employeeModel.findByIdAndUpdate(req.params.id,req.body);
+          res.redirect('/employee'); 
+    } catch (error) {
+        res.status(404).send("Data not updated");
     }
-});
+    });
 
 
 
-router.get('/add', (req, res) => {
-  res.render('addEmployee');
-});
+    router.post('/addform', async (req, res) => {
+        try {
+            const item = req.body;
+            const data = new employeeModel(item);
+            await data.save();
+            res.redirect('/employee');
+        } catch (error) {
+        res.status(404).send("Data not inserted");
+        }
+    });
+   
 
 
-router.post('/add', async (req, res) => {
-    const { name, designation, location, salary } = req.body;
-    console.log('Adding Employee:', req.body); 
-    try {
-      const newEmployee = new Employee({ name, designation, location, salary });
-      await newEmployee.save();
-      console.log('Employee Added:', newEmployee);
-      res.redirect('/');
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Server Error');
-    }
-  });
-  
+    router.post('/delete/:id', async (req, res) => {
+        try {
+            const data = await employeeModel.findByIdAndDelete(req.params.id);
+            res.redirect('/employee');
+        } catch (error) {
+            res.status(404).send("Data not deleted");
+        }
+    });
 
-router.post('/edit/:id', async (req, res) => {
-  const { name, designation, location, salary } = req.body;
-  try {
-    await Employee.findByIdAndUpdate(req.params.id, { name, designation, location, salary });
-    res.redirect('/');
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
-});
+    return router;
+}
 
+module.exports = employeeroutes;
 
-router.post('/delete/:id', async (req, res) => {
-  try {
-    await Employee.findByIdAndDelete(req.params.id);
-    res.redirect('/');
-  } catch (err) {
-    res.status(500).send('Server Error');
-  }
-});
-
-
-
-module.exports = router;
