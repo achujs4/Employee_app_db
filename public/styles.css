@@ -58,8 +58,16 @@
 
 
    .card{
-    background-color: aliceblue !important;
+    background-color: rgb(239, 239, 239) !important;
+ 
   }
   .navbar{
-    background-color:lightblue !important;
+    background-color:rgb(67, 206, 240) !important;
+    text-decoration:solid;
+  }
+
+  body{
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0DD2qbLkpuRZAUpzySTendZnF3VoDrUliLg&s);
+    background-size: cover;
+    background-repeat: no-repeat;
   }
